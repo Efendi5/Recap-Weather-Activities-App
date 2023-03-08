@@ -10,10 +10,10 @@ export default function EntryForm({ onAddActivity }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const newActivity = { name: activityName, id: uid() };
-    event.target.reset();
+    const data = Object.fromEntries(formData);
+    onAddActivity(data);
 
-    onAddActivity();
+    event.target.reset();
   }
 
   return (
