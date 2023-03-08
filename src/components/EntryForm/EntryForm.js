@@ -11,6 +11,7 @@ export default function EntryForm({ onAddActivity }) {
     }
 
     event.target.reset();
+    event.target.elements.name.focus()
   }
 
   return (
