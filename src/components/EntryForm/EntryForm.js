@@ -1,17 +1,16 @@
 import Button from "../Button/Button";
 import React from "react";
-import { useState } from "react";
-import { uid } from "uid";
 
 export default function EntryForm({ onAddActivity }) {
-  const [activityName, setActivityName] = useState({});
-  const [isForGoodWeather, setIsForGoodWeather] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    onAddActivity(data);
+    if(data){
+      onAddActivity(data);
+    }
+    console.log(data)
 
     event.target.reset();
   }
@@ -22,11 +21,11 @@ export default function EntryForm({ onAddActivity }) {
       <div className="entry-form__fields">
         <div className="entry-form__field">
           <label htmlFor="activityName">Name</label>
-          <input type="text" id="activityName" />
+          <input name="name" type="text" id="activityName" required/>
         </div>
         <div className="entry-form__field">
           <label htmlFor="isForGoodWeather">Good-weather activity</label>
-          <input type="checkbox" id="isForGoodWeather"></input>
+          <input name="isGoodWeather" type="checkbox" id="isForGoodWeather"></input>
         </div>
         <div className="entry-form__button-wrapper">
           <Button type="submit">Submit</Button>
