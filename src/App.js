@@ -42,7 +42,7 @@ function App() {
   }
 
   return (
-    weather &&
+    weather ?
     <div>
       <List data={weather}>
         {entries
@@ -55,6 +55,8 @@ function App() {
       </List>
       <EntryForm onAddActivity={handleAddEntry} />
     </div>
+    :
+    <div>Loading ...</div>
   );
 }
 
