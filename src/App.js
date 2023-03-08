@@ -13,21 +13,22 @@ function App() {
   const weather = useWeatherApi(`https://example-apis.vercel.app/api/weather`);
 
   function useWeatherApi(url) {
-    const [isGoodWeather, setIsGoodWeather] = useState();
+    const [weatherData, setweatherData] = useState();
 
     useEffect(() => {
       async function startFetching() {
         const response = await fetch(url);
-        const data = await response.json();
-
-        setIsGoodWeather(data.isGoodWeather);
+        if(response.ok){ 
+          const data = await response.json();
+          setweatherData(data);
+        }
       }
 
       startFetching();
     }, [url]);
-    console.log(isGoodWeather);
-    return isGoodWeather;
+    return weatherData;
   }
+
 
   function handleAddEntry(newEntry) {
     setEntries([
@@ -40,13 +41,13 @@ function App() {
     ]);
   }
 
-  console.log(entries);
   return (
+    weather &&
     <div>
-      <List isGoodWeather={!weather}>
+      <List data={weather}>
         {entries
           .filter((entry) =>
-            weather ? entry.isGoodWeather : !entry.isGoodWeather
+            weather.isGoodWeather ? entry.isGoodWeather : !entry.isGoodWeather
           )
           .map((entry) => {
             return <Entry key={entry.id} description={entry.name} />;

@@ -1,12 +1,15 @@
 import React from "react";
 
-export default function List({ children, isGoodWeather }) {
-  return (
+export default function List({ children, data }) {
+   return(
+    data &&
     <div>
       <h1>
-        {isGoodWeather
-          ? "Bad weather outside! Here's what you can do now."
-          : "The weather is awesome! Go outside and:"}
+        <div>{`${data.condition} and ${data.temperature} Grad C`}</div>
+        {data.isGoodWeather
+          ? "The weather is awesome! Go outside and:"
+          : "Bad weather outside! Here's what you can do now."
+        }
       </h1>
       {children}
     </div>
