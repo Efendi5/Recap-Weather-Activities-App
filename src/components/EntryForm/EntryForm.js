@@ -4,16 +4,17 @@ import { useState } from "react";
 import { uid } from "uid";
 
 export default function EntryForm({ onAddActivity }) {
-  const [activityName, setActivityName] = useState("");
-  const [isForGoodWeather, setIsForGoodWeather] = useState("false");
+  const [activityName, setActivityName] = useState({});
+  const [isForGoodWeather, setIsForGoodWeather] = useState(false);
 
-  function handleSubmit(event) => {
+  function handleSubmit(event) {
     event.preventDefault();
+    const formData = new FormData(event.target);
     const newActivity = { name: activityName, id: uid() };
     event.target.reset();
-  }
 
-  onAddActivity();
+    onAddActivity();
+  }
 
   return (
     <form className="entry-form" onSubmit={handleSubmit}>
