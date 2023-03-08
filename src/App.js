@@ -41,6 +41,12 @@ function App() {
     ]);
   }
 
+  function handleDeleteActivity(id) {
+    setEntries(
+      entries.filter(entry => entry.id !== id)
+    )
+  }
+
   return (
     weather ?
     <div>
@@ -50,7 +56,7 @@ function App() {
             weather.isGoodWeather ? entry.isGoodWeather : !entry.isGoodWeather
           )
           .map((entry) => {
-            return <Entry key={entry.id} description={entry.name} />;
+            return <Entry handleDelete={() => handleDeleteActivity(entry.id) } key={entry.id}  description={entry.name} />;
           })}
       </List>
       <EntryForm onAddActivity={handleAddEntry} />
