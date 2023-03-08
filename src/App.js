@@ -49,7 +49,7 @@ function App() {
 
   return (
     weather ?
-    <div>
+    <div className="app-container">
       <List data={weather}>
         {entries
           .filter((entry) =>
